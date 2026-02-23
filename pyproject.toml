@@ -4,6 +4,7 @@ version = "0.0.1"
 
 [project.scripts]
 toolbox-info = "utils.toolbox_info:main"
+proj-tree = "utils.proj_tree:main"
 
 [build-system]
 requires = ["setuptools", "wheel"]

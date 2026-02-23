@@ -1,3 +1,7 @@
-# Story of Project Toolbox
+# Project Toolbox
 
-## [Project Configuration](configuration.md)
+## [Configuration](configuration.md)
+
+## [Toolbox Info](toolbox-info.md)
+
+## [Project Tree](proj-tree.md)

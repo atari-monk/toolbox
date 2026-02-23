@@ -1,18 +1,18 @@
-# [Story of Project Toolbox](index.md) - Project Configuration
+# [Project Toolbox](index.md) - Configuration
 
 ## Table of Contents <a id="toc"></a>
 
-- [Project Configuration](#project-configuration)
-  - [Pyproject](#pyproject)
-  - [Gitignore](#gitignore)
+- [Pyproject](#pyproject)
 
-- [Info Script](#info)
+- [Gitignore](#gitignore)
+
+- [Strict Type Checking](#pylance)
 
 - [Install](#install)
 
-## Project Configuration <a id="project-configuration"></a>
+## Pyproject <a id="pyproject"></a>
 
-### Pyproject <a id="pyproject"></a>
+Needs to be updated with every new script.  
 
 pyproject.toml
 
@@ -23,6 +23,7 @@ version = "0.0.1"
 
 [project.scripts]
 toolbox-info = "utils.toolbox_info:main"
+proj-tree = "utils.proj_tree:main"
 
 [build-system]
 requires = ["setuptools", "wheel"]
@@ -34,7 +35,7 @@ where = ["src"]
 
 [⬆ Table of Contents](#toc)
 
-### Gitignore <a id="gitignore"></a>
+## Gitignore <a id="gitignore"></a>
 
 .gitignore
 
@@ -47,39 +48,65 @@ build
 
 [⬆ Table of Contents](#toc)
 
-## Info Script <a id="info"></a>
+## Strict Type Checking <a id="pylance"></a>
 
-src/utils/toolbox_info.py
+Python project using Pylance with strict type checking.  
 
-```py
-import argparse
+### **.vscode/settings.json**
 
-COMMANDS = {
-    'toolbox-info': 'Show available toolbox commands'
+```json
+{
+  // Python interpreter to use
+  "python.pythonPath": ".venv/bin/python3.12",
+
+  // Enable Pylance as the language server
+  "python.languageServer": "Pylance",
+
+  // Exclude folders like virtual environments or build artifacts
+  "files.exclude": {
+    "**/__pycache__": true,
+    "**/.venv": true,
+    "**/.pytest_cache": true
+  }
 }
-
-def main():
-    parser = argparse.ArgumentParser(description='Toolbox command overview')
-    parser.add_argument(
-        '-v', '--verbose',
-        action='store_true',
-        help='Show command descriptions'
-    )
-
-    args = parser.parse_args()
-
-    if args.verbose:
-        print("Commands and descriptions:")
-        for key, description in COMMANDS.items():
-            print(f"  {key}: {description}")
-    else:
-        print("Commands:")
-        for key in COMMANDS:
-            print(f"  {key}")
-
-if __name__ == "__main__":
-    main()
 ```
+
+### **pyrightconfig.json**
+
+```json
+{
+  // Strict type checking
+  "typeCheckingMode": "strict",
+
+  // Folders to exclude from type checking
+  "exclude": ["**/tests", "**/.venv", "**/__pycache__"],
+
+  // Report issues for optional member access
+  "reportOptionalMemberAccess": true,
+
+  // Report missing imports
+  "reportMissingImports": true,
+
+  // Ignore private usage warnings
+  "reportPrivateUsage": false
+}
+```
+
+### ✅ **How it works**
+
+1. **VS Code `.vscode/settings.json`**:
+
+   * Configures Pylance in the editor.
+   * Enables strict type checking while controlling warning vs error levels.
+
+2. **`pyrightconfig.json`**:
+
+   * Ensures the same type checking rules are enforced outside VS Code (CI pipelines, command line, other editors using Pyright).
+
+3. **Consistency**:
+
+   * Both files ensure your project always uses the same type checking rules.
+   * Excludes virtual environments, cache folders, and test folders from unnecessary checks.
 
 [⬆ Table of Contents](#toc)
 

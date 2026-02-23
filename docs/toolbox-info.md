@@ -1,3 +1,22 @@
+# [Project Toolbox](index.md) - Toolbox Info
+
+## Table of Contents <a id="toc"></a>
+
+- [Script](#script)
+
+- [Usage Example](#usage)
+
+## Script <a id="script"></a>
+
+Pros:  
+    - Simplest script to print aliases of cli tools available in package
+
+Cons:  
+    - Every time script is added code of the script changes
+
+src/utils/toolbox_info.py
+
+```py
 import argparse
 
 COMMANDS = {
@@ -26,3 +45,24 @@ def main():
 
 if __name__ == "__main__":
     main()
+```
+
+[⬆ Table of Contents](#toc)
+
+## Usage Example <a id="usage"></a>
+
+Print the list of available toolbox commands (default, concise):
+
+```sh
+toolbox-info
+```
+
+Show commands **with descriptions** using the verbose flag (`--verbose` or `-v`):
+
+```sh
+toolbox-info --verbose
+# short form:
+toolbox-info -v
+```
+
+[⬆ Table of Contents](#toc)
