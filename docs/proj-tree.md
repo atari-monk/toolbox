@@ -1,4 +1,4 @@
-# [Project Toolbox](index.md) - Project Tree
+# [Toolbox](index.md) - Project Tree
 
 ## Table of Contents <a id="toc"></a>
 

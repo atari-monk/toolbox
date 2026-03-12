@@ -1,4 +1,4 @@
-# [Project Toolbox](index.md) - Toolbox Info
+# [Toolbox](index.md) - Toolbox Info
 
 ## Table of Contents <a id="toc"></a>
 
@@ -21,7 +21,8 @@ import argparse
 
 COMMANDS = {
     'toolbox-info': 'Show available toolbox commands',
-    'proj-tree': 'Print the directory tree of current or chosen path'
+    'proj-tree': 'Print the directory tree of current or chosen path',
+    'yt-mp3': 'YouTube url to mp3'
 }
 
 def main():

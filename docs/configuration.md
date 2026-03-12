@@ -1,14 +1,8 @@
-# [Project Toolbox](index.md) - Configuration
+# [Toolbox](index.md) - Configuration
 
 ## Table of Contents <a id="toc"></a>
 
-- [Pyproject](#pyproject)
-
-- [Gitignore](#gitignore)
-
-- [Strict Type Checking](#pylance)
-
-- [Install](#install)
+- [Pyproject](#pyproject) **/** [Gitignore](#gitignore) **/** [Strict Type Checking](#pylance) **/** [Virtual Environment](#virtual-environment) **/** [Requirements](#requirements) **/** [Install](#install)
 
 ## Pyproject <a id="pyproject"></a>
 
@@ -24,6 +18,7 @@ version = "0.0.1"
 [project.scripts]
 toolbox-info = "utils.toolbox_info:main"
 proj-tree = "utils.proj_tree:main"
+yt-mp3 = "utils.yt_to_mp3:main"
 
 [build-system]
 requires = ["setuptools", "wheel"]
@@ -107,6 +102,90 @@ Python project using Pylance with strict type checking.
 
    * Both files ensure your project always uses the same type checking rules.
    * Excludes virtual environments, cache folders, and test folders from unnecessary checks.
+
+[⬆ Table of Contents](#toc)
+
+
+## Virtual Environment <a id="virtual-environment"></a>
+
+Minimum commands to **create and activate a Python virtual environment (`.venv`)**.
+
+### macOS / Linux
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+### Windows (PowerShell)
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+```
+
+### Windows (CMD)
+
+```cmd
+python -m venv .venv
+.venv\Scripts\activate
+```
+
+After activation you should see `(.venv)` at the start of your terminal prompt.
+
+### Optional (common next step)
+
+```bash
+pip install -r requirements.txt
+```
+
+[⬆ Table of Contents](#toc)
+
+## Requirements <a id="requirements"></a>
+
+Add **`yt-dlp`** to your `requirements.txt` like this:
+
+### 1️⃣ Install it in your activated venv
+
+```bash
+pip install yt-dlp
+```
+
+### 2️⃣ Save it to `requirements.txt`
+
+```bash
+pip freeze > requirements.txt
+```
+
+That will add a line similar to:
+
+```
+yt-dlp==2025.3.21
+```
+
+### Faster manual way (often preferred)
+
+Just open `requirements.txt` and add:
+
+```
+yt-dlp
+```
+
+Then others can install it with:
+
+```bash
+pip install -r requirements.txt
+```
+
+### Pro tip
+
+If you **only want to append it without overwriting existing packages**:
+
+```bash
+pip freeze | grep yt-dlp >> requirements.txt
+```
+
+If you want, I can also show a **cleaner modern workflow (`pip-tools` / minimal reqs)** that keeps `requirements.txt` much nicer for Python projects.
 
 [⬆ Table of Contents](#toc)
 
@@ -198,7 +277,19 @@ dependencies = [
 ]
 ```
 
-and reinstall
+and reinstall  
+
+or  
+
+```sh
+pipx inject toolbox yt-dlp
+```
+
+### Remove .venv
+
+```sh
+rm -rf .venv
+```
 
 ---
 
